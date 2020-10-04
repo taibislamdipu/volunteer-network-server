@@ -13,7 +13,7 @@ app.use(cors());
 
 const port = 5000
 
-
+const ObjectId = require('mongodb').ObjectId;
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
@@ -25,9 +25,28 @@ client.connect(err => {
         const event = req.body;
         eventCollection.insertOne(event)
             .then(result => {
-                console.log(result);
+                console.log(result.insertedCount);
+                res.send(result.insertedCount)
             })
     })
+
+    // read event
+    app.get("/events", (req, res) => {
+        eventCollection.find({})
+            .toArray((err, documents) => {
+                res.send(documents)
+            })
+    })
+
+    // read single event
+    app.get("/events/:_id", (req, res) => {
+        eventCollection.find({ _id: ObjectId(req.params._id) })
+            .toArray((err, documents) => {
+                res.send(documents[0])
+            })
+    })
+
+
 });
 
 
