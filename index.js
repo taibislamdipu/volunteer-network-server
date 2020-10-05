@@ -18,21 +18,17 @@ const ObjectId = require('mongodb').ObjectId;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
     const eventCollection = client.db("volunteerNetworkDB").collection("events");
-    // console.log('Database connected successfully!!');
-
-    // app.get('/', (req, res) => {
-    //     res.send('Volunteer network server is ready', err)
-    // })
+    console.log('Database connected successfully!!');
 
     // read event
-    app.get("/readAllEvents", (req, res) => {
+    app.get("/allEvent", (req, res) => {
         eventCollection.find({})
             .toArray((err, documents) => {
                 res.send(documents)
             })
     })
 
-
+  
     // insert user registered events
     // app.post("/registeredEvent", (req, res) => {
     //     const selectedEvent = req.body;
@@ -65,13 +61,16 @@ client.connect(err => {
 
 
     // read single event
-    // app.get("/readAllEvents/:_id", (req, res) => {
-    //     eventCollection.find({ _id: ObjectId(req.params._id) })
-    //         .toArray((err, documents) => {
-    //             res.send(documents[0])
-    //         })
-    // })
+    app.get("/availableEvents/:_id", (req, res) => {
+        eventCollection.find({ _id: ObjectId(req.params._id) })
+            .toArray((err, documents) => {
+                res.send(documents[0])
+            })
+    })
 
+    app.get('/', (req, res) => {
+        res.send('Volunteer network server is ready')
+    })
 
 });
 
