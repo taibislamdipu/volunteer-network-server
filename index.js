@@ -20,10 +20,27 @@ client.connect(err => {
     const eventCollection = client.db("volunteerNetworkDB").collection("events");
     console.log('Database connected successfully!!');
 
-    // create event
-    app.post("/addEvent", (req, res) => {
+    // insert user registered events
+    app.post("/registeredEvent", (req, res) => {
+        const selectedEvent = req.body;
+        console.log(selectedEvent);
+    })
+
+
+    // create single event from fakeData
+    // app.post("/addEvent", (req, res) => {
+    //     const event = req.body;
+    //     eventCollection.insertOne(event[0])
+    //         .then(result => {
+    //             console.log(result.insertedCount);
+    //             res.send(result.insertedCount)
+    //         })
+    // })
+
+    // create bulk event from fakeData
+    app.post("/addEvents", (req, res) => {
         const event = req.body;
-        eventCollection.insertOne(event)
+        eventCollection.insertMany(event)
             .then(result => {
                 console.log(result.insertedCount);
                 res.send(result.insertedCount)
