@@ -20,6 +20,15 @@ client.connect(err => {
     const eventCollection = client.db("volunteerNetworkDB").collection("events");
     console.log('Database connected successfully!!');
 
+    // read event
+    app.get("/readAllEvents", (req, res) => {
+        eventCollection.find({})
+            .toArray((err, documents) => {
+                res.send(documents)
+            })
+    })
+
+
     // insert user registered events
     app.post("/registeredEvent", (req, res) => {
         const selectedEvent = req.body;
@@ -49,13 +58,7 @@ client.connect(err => {
             })
     })
 
-    // read event
-    app.get("/readAllEvents", (req, res) => {
-        eventCollection.find({})
-            .toArray((err, documents) => {
-                res.send(documents)
-            })
-    })
+
 
     // read single event
     app.get("/readAllEvents/:_id", (req, res) => {
