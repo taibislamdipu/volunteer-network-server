@@ -37,6 +37,7 @@ client.connect(err => {
     //         })
     // })
 
+
     // create bulk event from fakeData
     app.post("/addEvents", (req, res) => {
         const event = req.body;
@@ -48,7 +49,7 @@ client.connect(err => {
     })
 
     // read event
-    app.get("/events", (req, res) => {
+    app.get("/readAllEvents", (req, res) => {
         eventCollection.find({})
             .toArray((err, documents) => {
                 res.send(documents)
@@ -56,7 +57,7 @@ client.connect(err => {
     })
 
     // read single event
-    app.get("/events/:_id", (req, res) => {
+    app.get("/readAllEvents/:_id", (req, res) => {
         eventCollection.find({ _id: ObjectId(req.params._id) })
             .toArray((err, documents) => {
                 res.send(documents[0])
