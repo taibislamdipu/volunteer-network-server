@@ -30,7 +30,6 @@ client.connect(err => {
 
   
     // insert user registered events
-    //
     // app.post("/registeredEvent", (req, res) => {
     //     const selectedEvent = req.body;
     //     console.log(selectedEvent);
