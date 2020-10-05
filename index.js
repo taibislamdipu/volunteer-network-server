@@ -18,7 +18,7 @@ const ObjectId = require('mongodb').ObjectId;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
     const eventCollection = client.db("volunteerNetworkDB").collection("events");
-    console.log('Database connected successfully!!');
+    // console.log('Database connected successfully!!');
 
     app.get('/', (req, res) => {
         res.send('Volunteer network server is ready', err)
