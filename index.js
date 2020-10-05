@@ -24,6 +24,7 @@ client.connect(err => {
     app.post("/registeredEvent", (req, res) => {
         const selectedEvent = req.body;
         console.log(selectedEvent);
+        res.send(req.body)
     })
 
 
