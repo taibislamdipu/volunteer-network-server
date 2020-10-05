@@ -20,9 +20,9 @@ client.connect(err => {
     const eventCollection = client.db("volunteerNetworkDB").collection("events");
     // console.log('Database connected successfully!!');
 
-    app.get('/', (req, res) => {
-        res.send('Volunteer network server is ready', err)
-    })
+    // app.get('/', (req, res) => {
+    //     res.send('Volunteer network server is ready', err)
+    // })
 
     // read event
     app.get("/readAllEvents", (req, res) => {
