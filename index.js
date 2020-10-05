@@ -67,7 +67,6 @@ client.connect(err => {
 });
 
 
-
 app.get('/', (req, res) => {
     res.send('Volunteer network server is ready!')
 })
