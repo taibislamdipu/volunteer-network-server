@@ -72,4 +72,4 @@ app.get('/', (req, res) => {
     res.send('Volunteer network server is ready!')
 })
 
-app.listen(port)
+app.listen(process.env.PORT || port)
