@@ -20,6 +20,10 @@ client.connect(err => {
     const eventCollection = client.db("volunteerNetworkDB").collection("events");
     console.log('Database connected successfully!!');
 
+    app.get('/', (req, res) => {
+        res.send('Volunteer network server is ready', err)
+    })
+
     // read event
     app.get("/readAllEvents", (req, res) => {
         eventCollection.find({})
@@ -30,11 +34,11 @@ client.connect(err => {
 
 
     // insert user registered events
-    app.post("/registeredEvent", (req, res) => {
-        const selectedEvent = req.body;
-        console.log(selectedEvent);
-        res.send(req.body)
-    })
+    // app.post("/registeredEvent", (req, res) => {
+    //     const selectedEvent = req.body;
+    //     console.log(selectedEvent);
+    //     res.send(req.body)
+    // })
 
 
     // create single event from fakeData
@@ -49,31 +53,29 @@ client.connect(err => {
 
 
     // create bulk event from fakeData
-    app.post("/addEvents", (req, res) => {
-        const event = req.body;
-        eventCollection.insertMany(event)
-            .then(result => {
-                console.log(result.insertedCount);
-                res.send(result.insertedCount)
-            })
-    })
+    // app.post("/addEvents", (req, res) => {
+    //     const event = req.body;
+    //     eventCollection.insertMany(event)
+    //         .then(result => {
+    //             console.log(result.insertedCount);
+    //             res.send(result.insertedCount)
+    //         })
+    // })
 
 
 
     // read single event
-    app.get("/readAllEvents/:_id", (req, res) => {
-        eventCollection.find({ _id: ObjectId(req.params._id) })
-            .toArray((err, documents) => {
-                res.send(documents[0])
-            })
-    })
+    // app.get("/readAllEvents/:_id", (req, res) => {
+    //     eventCollection.find({ _id: ObjectId(req.params._id) })
+    //         .toArray((err, documents) => {
+    //             res.send(documents[0])
+    //         })
+    // })
 
 
 });
 
 
-app.get('/', (req, res) => {
-    res.send('Volunteer network server is ready!')
-})
+
 
 app.listen(process.env.PORT || port)
