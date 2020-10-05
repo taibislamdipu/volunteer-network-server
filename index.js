@@ -59,8 +59,7 @@ client.connect(err => {
     // })
 
 
-
-    // read single event
+    // read single event from allEvent
     app.get("/availableEvents/:_id", (req, res) => {
         eventCollection.find({ _id: ObjectId(req.params._id) })
             .toArray((err, documents) => {
@@ -73,8 +72,5 @@ client.connect(err => {
     })
 
 });
-
-
-
 
 app.listen(process.env.PORT || port)
